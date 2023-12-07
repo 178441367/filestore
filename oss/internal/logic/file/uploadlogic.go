@@ -39,7 +39,11 @@ func NewUploadLogic(ctx context.Context, svcCtx *svc.ServiceContext, r *http.Req
 func (l *UploadLogic) Upload() (resp *types.UploadResp, err error) {
 
 	file, handler, err := l.r.FormFile("file")
-	logx.WithContext(l.ctx).Infof("File uploaded successfully: %s", handler.Filename)
+	defer file.Close()
+	if err != nil {
+		logx.WithContext(l.ctx).Errorf("Error retrieving the file,异常:%s", err.Error())
+		return nil, err
+	}
 	// 读取文件后缀
 	ext := path.Ext(handler.Filename)
 	// 读取文件名并加密
@@ -47,15 +51,11 @@ func (l *UploadLogic) Upload() (resp *types.UploadResp, err error) {
 	name = utils.MD5V([]byte(name))
 	// 拼接新文件名
 	filename := name + "_" + time.Now().Format("20060102150405") + ext
-	dir := filepath.Join(l.svcCtx.Config.Upload.Dir, time.Now().Format("200601"))
+	date := time.Now().Format("200601")
+	dir := fmt.Sprintf("%s/%s", l.svcCtx.Config.Upload.Dir, date)
 	localPath := filepath.Join(dir, filename)
 	host := l.r.Host
-	url := fmt.Sprintf("%s%s/%s", host, l.svcCtx.Config.Upload.Prefix, filename)
-	if err != nil {
-		logx.WithContext(l.ctx).Errorf("Error retrieving the file,异常:%s", err.Error())
-		return nil, err
-	}
-	defer file.Close()
+	url := fmt.Sprintf("%s%s/%s/%s", host, l.svcCtx.Config.Upload.Prefix, date, filename)
 
 	err = os.MkdirAll(dir, os.ModePerm)
 	if err != nil {
