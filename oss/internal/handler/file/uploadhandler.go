@@ -3,8 +3,8 @@ package file
 import (
 	"net/http"
 
-	"api/oss/internal/logic/file"
-	"api/oss/internal/svc"
+	"filestorage/oss/internal/logic/file"
+	"filestorage/oss/internal/svc"
 	"github.com/zeromicro/go-zero/rest/httpx"
 )
 

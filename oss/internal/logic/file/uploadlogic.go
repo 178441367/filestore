@@ -1,8 +1,8 @@
 package file
 
 import (
-	"api/oss/utils"
 	"context"
+	"filestorage/oss/utils"
 	"fmt"
 	"io"
 	"net/http"
@@ -12,8 +12,8 @@ import (
 	"strings"
 	"time"
 
-	"api/oss/internal/svc"
-	"api/oss/internal/types"
+	"filestorage/oss/internal/svc"
+	"filestorage/oss/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -54,7 +54,14 @@ func (l *UploadLogic) Upload() (resp *types.UploadResp, err error) {
 	date := time.Now().Format("200601")
 	dir := fmt.Sprintf("%s/%s", l.svcCtx.Config.Upload.Dir, date)
 	localPath := filepath.Join(dir, filename)
-	host := l.r.Host
+	var scheme string
+	if l.r.URL.Scheme == "" {
+		scheme = "http://"
+	} else {
+		scheme = l.r.URL.Scheme + "://"
+	}
+
+	host := scheme + l.r.Host
 	url := fmt.Sprintf("%s%s/%s/%s", host, l.svcCtx.Config.Upload.Prefix, date, filename)
 
 	err = os.MkdirAll(dir, os.ModePerm)

@@ -1,4 +1,4 @@
-module api
+module filestorage
 
 go 1.21.4
 

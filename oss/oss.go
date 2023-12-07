@@ -1,10 +1,10 @@
 package main
 
 import (
-	"api/oss/internal/config"
-	"api/oss/internal/handler"
-	"api/oss/internal/svc"
-	"api/oss/libs"
+	"filestorage/oss/internal/config"
+	"filestorage/oss/internal/handler"
+	"filestorage/oss/internal/svc"
+	"filestorage/oss/libs"
 	"flag"
 	"fmt"
 	"github.com/zeromicro/go-zero/core/conf"

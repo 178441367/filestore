@@ -1,7 +1,7 @@
 package svc
 
 import (
-	"api/oss/internal/config"
+	"filestorage/oss/internal/config"
 )
 
 type ServiceContext struct {

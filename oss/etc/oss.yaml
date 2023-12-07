@@ -4,3 +4,4 @@ Port: 8888
 Upload:
   Prefix: /static
   Dir: uploads
+MaxBytes: 3145728
