@@ -1,0 +1,13 @@
+
+type (
+    UploadResp {
+        Url    string `json:"url"`
+    }
+)
+@server(
+    group: file
+)
+service oss {
+    @handler Upload
+    post /upload returns (UploadResp)
+}
