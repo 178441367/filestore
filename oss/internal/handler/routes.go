@@ -2,10 +2,10 @@
 package handler
 
 import (
-	"filestorage/oss/internal/handler/file"
-	"filestorage/oss/internal/svc"
 	"net/http"
 
+	file "filestorage/oss/internal/handler/file"
+	"filestorage/oss/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )

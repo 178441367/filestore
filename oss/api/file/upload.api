@@ -2,6 +2,7 @@
 type (
     UploadResp {
         Url    string `json:"url"`
+        FileName string `json:"fileName"`
     }
 )
 @server(

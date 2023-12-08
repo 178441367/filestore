@@ -2,5 +2,6 @@
 package types
 
 type UploadResp struct {
-	Url string `json:"url"`
+	Url      string `json:"url"`
+	FileName string `json:"fileName"`
 }
