@@ -27,16 +27,14 @@ func NewUploadLogic(ctx context.Context, svcCtx *svc.ServiceContext, r *http.Req
 }
 
 // Upload 文件上传
-// 参考：https://github.com/zeromicro/zero-examples/blob/main/monolithic/internal/logic/uploadlogic.go
 func (l *UploadLogic) Upload() (resp *types.UploadResp, err error) {
-
 	file, handler, err := l.r.FormFile("file")
 	defer file.Close()
 	if err != nil {
 		logx.WithContext(l.ctx).Errorf("Error retrieving the file,异常:%s", err.Error())
 		return nil, err
 	}
-	oss := driver.NewOss("local", l.svcCtx, l.r)
+	oss := driver.NewOss(l.svcCtx.Config.Upload.Driver, l.svcCtx, l.r)
 	url, fileName, err := oss.UploadFile(handler)
 	return &types.UploadResp{
 		Url:      url,

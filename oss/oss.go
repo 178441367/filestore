@@ -1,6 +1,7 @@
 package main
 
 import (
+	"filestorage/oss/global"
 	"filestorage/oss/internal/config"
 	"filestorage/oss/internal/handler"
 	"filestorage/oss/internal/svc"
@@ -18,6 +19,7 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
+	global.Conf = &c
 	ctx := svc.NewServiceContext(c)
 	server := rest.MustNewServer(c.RestConf)
 	defer server.Stop()

@@ -1,7 +1,11 @@
 Name: oss
 Host: 0.0.0.0
 Port: 8888
+Middlewares:
+  Log: true
 Upload:
+  Driver: local
   Prefix: /static
   Dir: /workspace/static2
 MaxBytes: 3145728
+Authorization: FAYLS6p+B7YyFRnZD#a
