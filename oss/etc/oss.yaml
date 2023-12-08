@@ -6,6 +6,6 @@ Middlewares:
 Upload:
   Driver: local
   Prefix: /static
-  Dir: /workspace/static2
+  Dir: /workspace/static
 MaxBytes: 3145728
 Authorization: FAYLS6p+B7YyFRnZD#a
