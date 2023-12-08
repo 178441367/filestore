@@ -3,5 +3,5 @@ Host: 0.0.0.0
 Port: 8888
 Upload:
   Prefix: /static
-  Dir: uploads
+  Dir: /workspace/static2
 MaxBytes: 3145728
