@@ -21,7 +21,7 @@ func main() {
 	conf.MustLoad(*configFile, &c)
 	global.Conf = &c
 	ctx := svc.NewServiceContext(c)
-	server := rest.MustNewServer(c.RestConf)
+	server := rest.MustNewServer(c.RestConf, rest.WithCors("*"))
 	defer server.Stop()
 	handler.RegisterHandlers(server, ctx)
 	libs.StaticFileHandler(server, c.Upload.Prefix, c.Upload.Dir)

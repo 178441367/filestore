@@ -6,7 +6,7 @@ type (
     }
 )
 @server(
-    middleware: TokenMiddleware,CorsMiddleware
+    middleware: TokenMiddleware
     group: file
 )
 service oss {
