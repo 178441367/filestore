@@ -1,18 +1,19 @@
 package driver
 
 import (
+	"filestorage/oss/global"
 	"filestorage/oss/internal/svc"
-	"mime/multipart"
+	"filestorage/oss/internal/types"
 	"net/http"
 )
 
 type OSS interface {
-	UploadFile(file *multipart.FileHeader) (string, string, error)
+	UploadFile(*types.UploadReq) (string, string, error)
 }
 
 // NewOss OSS的实例化方法
-func NewOss(ossType string, svcCtx *svc.ServiceContext, req *http.Request) OSS {
-	switch ossType {
+func NewOss(svcCtx *svc.ServiceContext, req *http.Request) OSS {
+	switch global.Conf.Upload.Driver {
 	case "local":
 		return &LocalDriver{
 			r:      req,

@@ -16,7 +16,6 @@ var configFile = flag.String("f", "etc/oss.yaml", "the config file")
 
 func main() {
 	flag.Parse()
-
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
 	global.Conf = &c

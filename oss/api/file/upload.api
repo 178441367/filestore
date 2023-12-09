@@ -1,9 +1,13 @@
 
 type (
+    UploadReq {
+        Dir string `form:"dir,optional"`
+    }
     UploadResp {
         Url    string `json:"url"`
         FileName string `json:"fileName"`
     }
+
 )
 @server(
     middleware: TokenMiddleware
@@ -11,5 +15,5 @@ type (
 )
 service oss {
     @handler Upload
-    post /upload returns (UploadResp)
+    post /upload (UploadReq) returns (UploadResp)
 }

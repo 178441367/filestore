@@ -27,15 +27,14 @@ func NewUploadLogic(ctx context.Context, svcCtx *svc.ServiceContext, r *http.Req
 }
 
 // Upload 文件上传
-func (l *UploadLogic) Upload() (resp *types.UploadResp, err error) {
-	file, handler, err := l.r.FormFile("file")
-	defer file.Close()
+func (l *UploadLogic) Upload(req *types.UploadReq) (resp *types.UploadResp, err error) {
+
 	if err != nil {
 		logx.WithContext(l.ctx).Errorf("Error retrieving the file,异常:%s", err.Error())
 		return nil, err
 	}
-	oss := driver.NewOss(l.svcCtx.Config.Upload.Driver, l.svcCtx, l.r)
-	url, fileName, err := oss.UploadFile(handler)
+	oss := driver.NewOss(l.svcCtx, l.r)
+	url, fileName, err := oss.UploadFile(req)
 	return &types.UploadResp{
 		Url:      url,
 		FileName: fileName,
