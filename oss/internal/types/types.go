@@ -2,7 +2,8 @@
 package types
 
 type UploadReq struct {
-	Dir string `form:"dir,optional"`
+	Dir            string `form:"dir,optional"`
+	FileNameCreate int8   `form:"fileNameCreate,optional"`
 }
 
 type UploadResp struct {

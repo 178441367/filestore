@@ -2,6 +2,7 @@
 type (
     UploadReq {
         Dir string `form:"dir,optional"`
+        FileNameCreate int8 `form:"fileNameCreate,optional"`
     }
     UploadResp {
         Url    string `json:"url"`
